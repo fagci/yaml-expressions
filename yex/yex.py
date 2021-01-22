@@ -22,8 +22,3 @@ class Yex:
     @staticmethod
     def _load(text):
         return yaml.load(text, Loader=FullLoader)
-
-
-# if __name__ == "__main__":
-#     print(Yex('./cfg/').render_file('cfg.yml', test='passed'))
-#     print(Yex.render_text('test: {{test}}', test='passed'))
