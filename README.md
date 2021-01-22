@@ -38,3 +38,43 @@ print(yex.render_text('test: {{test}}', test='passed'))
 ```
 
 Output: `{'test': 'passed'}`
+
+## Another examples
+
+### Describe SEO checklist, generate report
+
+```python
+tests_tpl = """
+tests:
+    title: {{ 20 < (title | length) < 70 }}
+    description: {{ 20 < (description | length) < 160 }}"""
+
+report_tpl = """
+report: >
+    Test results:
+      Title: {{ 'ok' if tests.title else 'fail' }}
+        ({{ title[:10] }}...)
+      Description: {{ 'ok' if tests.description else 'fail' }}
+        ({{ description[:10] }}...)
+"""
+
+data = {
+    'title': 't' * 130,
+    'description': 'd' * 120,
+}
+
+results = Yex.render_text(tests_tpl, data)
+report = Yex.render_text(report_tpl, **results, **data)
+
+print(report.get('report'))
+```
+
+Output:
+
+```text
+Test results:
+  Title: fail
+    (tttttttttt...)
+  Description: ok
+    (dddddddddd...)
+```

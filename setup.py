@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name="yaml-expressions",
-    version="0.1.1",
+    version="0.1.2",
     author="Mikhail Yudin",
     author_email="fagci.nsk@gmail.com",
     description=("Jinja2 templates for yaml. Make dynamic rules and configs."),

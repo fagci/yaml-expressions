@@ -11,14 +11,21 @@ class Yex:
 
     def render_file(self, file, *args, **context):
         """Render yaml with context"""
-        yaml_str = self._env.get_template(file).render(*args, **context)
-        return self._load(yaml_str)
+        template = self._env.get_template(file)
+        yaml_text = self._render(template, *args, **context)
+        return self._load(yaml_text)
 
     @classmethod
     def render_text(cls, text, *args, **context):
         """Render pure yaml text template with context"""
-        return cls._load(Template(text).render(*args, **context))
+        template = Template(text)
+        yaml_text = cls._render(template, *args, **context)
+        return cls._load(yaml_text)
 
     @staticmethod
-    def _load(text):
+    def _render(template: Template, *args, **kwargs):
+        return template.render(*args, **kwargs)
+
+    @staticmethod
+    def _load(text: str):
         return yaml.load(text, Loader=FullLoader)
