@@ -18,6 +18,7 @@ setup(
     packages=['yex'],
     install_requires=['pyyaml', 'jinja2'],
     long_description=read('README.md'),
+    long_description_content_type='text/markdown',
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
