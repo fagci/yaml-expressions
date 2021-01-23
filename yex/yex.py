@@ -17,7 +17,8 @@ class Yex:
         if is_template_string_passed:
             self._t = Template(t)
         elif is_template_file_passed:
-            pass  # not implemented
+            with open(t) as file:
+                self._t = Template(file.read())
         else:
             self._env = Environment(loader=FileSystemLoader(t))
 
