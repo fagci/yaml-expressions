@@ -6,12 +6,18 @@ from yaml.loader import FullLoader
 
 
 class Yex:
+    _t = None  # template if initiated by passing string with it
+    _env = None  # environment if initiated with templates path
+
     def __init__(self, t: str):
-        """Init with yaml templates folder"""
-        # is template string
-        if '{' in t:
+        """Init with template folder, template file or template string."""
+        is_template_string_passed = '{' in t
+        is_template_file_passed = t.endswith(('.yml', '.yaml',))
+
+        if is_template_string_passed:
             self._t = Template(t)
-        # is file
+        elif is_template_file_passed:
+            pass  # not implemented
         else:
             self._env = Environment(loader=FileSystemLoader(t))
 
